@@ -8,7 +8,7 @@ MCPL is specified in [anima-research/mcpl](https://github.com/anima-research/mcp
 
 This crate is the Rust counterpart of [mcpl-core-ts](https://github.com/anima-research/mcpl-core-ts), the TypeScript MCPL library. The npm package `@animalabs/mcpl-core` is built from mcpl-core-ts, not from this repository.
 
-The same author started both libraries in February 2026. This crate was written for version 0.4 of the specification, and its code was last changed on 13 February 2026, in `795a014`. mcpl-core-ts has kept changing since then. It has added a WebSocket transport, the `state/update`, `state/get` and `branches/*` methods, and event tags, and in August 2026 it changed its capability types for version 0.5. This crate has none of those changes, and it can't read capabilities in the 0.5 shapes. In the 0.5 draft, `channels` can be an object of its parts, where this crate expects a boolean, and `featureSets` is keyed by name, where this crate expects an array. Deserializing the draft's capabilities example (SPEC.md §17.2) into `McplCapabilities` fails.
+The same author started both libraries in February 2026. This crate was written for version 0.4 of the specification, and its code was last changed on 13 February 2026, in `795a014`. mcpl-core-ts has kept changing since then. It has added a WebSocket transport, the `state/update`, `state/get` and `branches/*` methods, and event tags, and in August 2026 it changed its capability types for version 0.5. This crate has none of those changes, and it can't read capabilities in the 0.5 shapes. In the 0.5 draft, `channels` can be an object of its parts, where this crate expects a boolean, and `featureSets` is keyed by name, where this crate expects an array. Deserializing the capabilities object in the draft's digest test vector (SPEC.md §17.2) into `McplCapabilities` fails.
 
 ## What's in it
 
@@ -16,7 +16,7 @@ The same author started both libraries in February 2026. This crate was written 
 |---|---|
 | `types` | JSON-RPC 2.0 messages (`JsonRpcRequest`, `JsonRpcResponse`, `JsonRpcNotification`), MCPL's error codes (`ERR_*`), and `ContentBlock` (text, image, audio or resource) |
 | `capabilities` | `McplCapabilities`, which MCPL places under `experimental.mcpl` in MCP's `initialize`, and the params and result of `initialize` |
-| `methods` | The types of MCPL's messages for feature sets, scoped access, state rollback and checkpoints, push events, context hooks, server-initiated inference, model info and channels, and the method names in `method` |
+| `methods` | The types of MCPL's messages for feature sets, scoped access, state rollback and checkpoints, host-managed state (`HostManagedState`, `JsonPatchOperation`), push events, context hooks, server-initiated inference, model info and channels, and the method names in `method` |
 | `connection` | `McplConnection`, `IncomingMessage` and `ConnectionError` |
 
 The crate root re-exports everything in `types`, `capabilities` and `methods`, and `McplConnection`. Import `IncomingMessage` and `ConnectionError` from `mcpl_core::connection`.
